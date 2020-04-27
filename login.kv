@@ -1,0 +1,37 @@
+
+FloatLayout:
+
+
+    MDTextField:
+        id: username
+        hint_text: "Enter Username"
+        helper_text: "Your registered username"
+        helper_text_mode: "on_focus"
+		pos_hint: {'center_x': 0.5, 'center_y': 0.6}
+		size_hint:(0.50, 0.10)
+		color_mode: 'primary'
+		
+		
+    MDTextField:
+        id: password
+        hint_text: "Enter Password"
+        helper_text: "Password registered with your username"
+        helper_text_mode: "on_focus"
+        password:True
+		pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+		size_hint:(0.50, 0.10)
+		color_mode: 'accent'
+		
+		   
+	MDLabel:
+		text: 'Welcome to Scheduler!'
+		font_size: 50
+		halign:'center'
+		pos_hint: {'center_y': 0.8}
+		font_name: 'Product Sans Regular.ttf'
+	MDRoundFlatButton:
+ 	   text: "Login"
+ 	   pos_hint:{'center_x':0.62,'center_y':0.37}
+	MDRoundFlatButton:
+ 	   text: "Sign Up"
+ 	   pos_hint:{'center_x':0.38,'center_y':0.37}		
