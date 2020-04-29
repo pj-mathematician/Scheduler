@@ -1,0 +1,38 @@
+<newinput>:
+	name: 'ninput'
+	FloatLayout:
+		DefaultLabel:
+			text:'Fill in your initial details'
+			font_size:35
+			pos_hint: {'center_y': 0.95}
+			font_name: 'Product Sans Bold.ttf'
+		SideLabel:
+			text:'Wake up time-'
+			pos_hint:{'center_x':0.6,'center_y':0.8}
+		ClockButton:
+			pos_hint:{'center_x':0.52,'center_y':0.8}
+			on_release: app.show_time_picker()
+		ShowTimeLabel:
+			id: wake
+			pos_hint:{'center_x':0.9,'center_y':0.8}
+	
+
+
+<DefaultLabel@MDLabel>:
+    theme_text_color: 'Primary'
+    halign: 'center'
+    font_name: 'Product Sans Regular.ttf'
+
+<DefaultInput@MDTextField>:
+    size_hint:(0.50, 0.10)
+<SideLabel@MDLabel>:
+	theme_text_color:'Primary'
+	font_size:27
+	font_name: 'Product Sans Regular.ttf'
+<ClockButton@MDFillRoundFlatIconButton>:
+	icon:'clock'
+	text : 'Set'
+	width:dp(100)
+<ShowTimeLabel@MDLabel>:
+    theme_text_color: 'Primary'
+    font_name: 'Product Sans Regular.ttf'	
