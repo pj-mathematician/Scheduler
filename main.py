@@ -1,32 +1,32 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 from kivy.lang import Builder
-from kivy.uix.screenmanager import *
+from kivy.uix.screenmanager import ScreenManager, Screen
 from kivymd.uix.label import MDLabel
 from kivymd.font_definitions import theme_font_styles
 from kivymd.app import MDApp
 from kivymd.uix.dialog import MDDialog
-
 from datetime import datetime
 from datetime import time
 from datetime import date
 from kivy.properties import ObjectProperty
+from kivymd.uix.snackbar import Snackbar
+from kivymd.uix.picker import MDTimePicker
+
+
 kv1 = 'Login.kv'
 kv2 = 'newinput.kv'
 
 
 class loginwindow(Screen):
-
     pass
 
 
 class signupwindow(Screen):
-
     pass
 
 
 class newinput(Screen):
-
     pass
 
 
@@ -35,7 +35,6 @@ class Test(MDApp):
     def build(self):
         self.theme_cls.theme_style = 'Dark'
         Builder.load_file(kv1)
-        Builder.load_file(kv2)
         self.sm = ScreenManager()
         self.sm.add_widget(loginwindow())
         self.sm.add_widget(signupwindow())
@@ -47,7 +46,7 @@ class Test(MDApp):
 
 
     def show_time_picker(self, *args):
-        from kivymd.uix.picker import MDTimePicker
+        
         self.time_dialog=MDTimePicker()
         self.time_dialog.bind(time=self.get_time)
         self.time_dialog.open()
