@@ -44,12 +44,64 @@ class Test(MDApp):
     dialog = None
     previous_time = ObjectProperty()
 
-
-    def show_time_picker(self, *args):
-        
+    fixedtimedict={}
+###***HIGHLY INEFFICIENT****###
+    def wake_time_picker(self):        
         self.time_dialog=MDTimePicker()
-        self.time_dialog.bind(time=self.get_time)
+        self.time_dialog.bind(time=self.wake_time)
         self.time_dialog.open()
+    
+    def bkf_time_picker(self):        
+        self.time_dialog=MDTimePicker()
+        self.time_dialog.bind(time=self.bkf_time)
+        self.time_dialog.open()
+    
+    def lch_time_picker(self):        
+        self.time_dialog=MDTimePicker()
+        self.time_dialog.bind(time=self.lch_time)
+        self.time_dialog.open()
+    
+    def din_time_picker(self):        
+        self.time_dialog=MDTimePicker()
+        self.time_dialog.bind(time=self.din_time)
+        self.time_dialog.open()    
+    
+    def slp_time_picker(self):        
+        self.time_dialog=MDTimePicker()
+        self.time_dialog.bind(time=self.slp_time)
+        self.time_dialog.open()
+    
+    def wake_time(self, instance, time):
+    	
+    	self.sm.get_screen('ninput').ids.wake.text = str(time)
+    	self.previous_time = time
+    	self.fixedtimedict['wake']=time
+    
+    def bkf_time(self, instance, time):
+    	
+    	self.sm.get_screen('ninput').ids.bkf.text = str(time)
+    	self.previous_time = time
+    	self.fixedtimedict['bkf']=time    
+
+    def lch_time(self, instance, time):
+    	
+    	self.sm.get_screen('ninput').ids.lch.text = str(time)
+    	self.previous_time = time
+    	self.fixedtimedict['lch']=time            
+    
+    def din_time(self, instance, time):
+    	
+    	self.sm.get_screen('ninput').ids.din.text = str(time)
+    	self.previous_time = time
+    	self.fixedtimedict['din']=time        
+    
+    def slp_time(self, instance, time):
+    	
+    	self.sm.get_screen('ninput').ids.slp.text = str(time)
+    	self.previous_time = time
+    	self.fixedtimedict['slp']=time        
+#####UGLY STUFF OVER!#####    
+    
 
     def on_signup(self, *args):
         self.sm.current = 'ninput'
@@ -63,10 +115,6 @@ class Test(MDApp):
                                    events_callback=self.on_signup)
 
         self.dialog.open()
-    def get_time(self, instance, time, **kwargs):
-    	super(Test, self).__init__(**kwargs)
-    	self.ids.wake.text = str(time)
-    	self.previous_time = time
 
 
 if __name__ == '__main__':
