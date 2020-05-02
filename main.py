@@ -14,8 +14,9 @@ from kivymd.uix.snackbar import Snackbar
 from kivymd.uix.picker import MDTimePicker
 
 
-kv1 = 'Login.kv'
+kv1 = 'loginwindow.kv'
 kv2 = 'newinput.kv'
+kv3 = 'signupwindow.kv'
 
 
 class loginwindow(Screen):
@@ -35,6 +36,8 @@ class Test(MDApp):
     def build(self):
         self.theme_cls.theme_style = 'Dark'
         Builder.load_file(kv1)
+        Builder.load_file(kv2)
+        Builder.load_file(kv3)
         self.sm = ScreenManager()
         self.sm.add_widget(loginwindow())
         self.sm.add_widget(signupwindow())

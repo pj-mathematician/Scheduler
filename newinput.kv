@@ -1,0 +1,75 @@
+#: include defaults.kv
+
+<newinput>:
+	name: 'ninput'
+	id:ninput
+	FloatLayout:
+		DefaultLabel:
+			text:'Fill in your initial details'
+			font_size:35
+			pos_hint: {'center_y': 0.95}
+			font_name: 'Product Sans Bold.ttf'
+
+
+		SideLabel:
+			text:'Wake up time-'
+			pos_hint:{'center_x':0.6,'center_y':0.8}
+		ClockButton:
+			pos_hint:{'center_x':0.6,'center_y':0.8}
+			on_release: 
+				app.time_picker()
+				app.dynamic_ip='wake'
+		ShowTimeLabel:
+			id: wake
+			pos_hint:{'center_x':0.93,'center_y':0.8}
+
+
+		SideLabel:
+			text:'Your Breakfast time-'
+			pos_hint:{'center_x':0.6,'center_y':0.7}
+		ClockButton:
+			pos_hint:{'center_x':0.6,'center_y':0.7}
+			on_release: 
+				app.time_picker()
+				app.dynamic_ip='bkf'
+		ShowTimeLabel:
+			id: bkf
+			pos_hint:{'center_x':0.93,'center_y':0.7}	
+
+
+		SideLabel:
+			text:'Your Lunch time-'
+			pos_hint:{'center_x':0.6,'center_y':0.6}
+		ClockButton:
+			pos_hint:{'center_x':0.6,'center_y':0.6}
+			on_release: 
+				app.time_picker()
+				app.dynamic_ip='lch'
+		ShowTimeLabel:
+			id: lch
+			pos_hint:{'center_x':0.93,'center_y':0.6}
+
+
+		SideLabel:
+			text:'Your Dinner time-'
+			pos_hint:{'center_x':0.6,'center_y':0.5}
+		ClockButton:
+			pos_hint:{'center_x':0.6,'center_y':0.5}
+			on_release: 
+				app.time_picker()
+				app.dynamic_ip='din'	
+		ShowTimeLabel:
+			id: din
+			pos_hint:{'center_x':0.93,'center_y':0.5}
+
+		SideLabel:
+			text:'Sleep time-'
+			pos_hint:{'center_x':0.6,'center_y':0.4}
+		ClockButton:
+			pos_hint:{'center_x':0.6,'center_y':0.4}
+			on_release: 
+				app.time_picker()
+				app.dynamic_ip='slp'
+		ShowTimeLabel:
+			id: slp
+			pos_hint:{'center_x':0.93,'center_y':0.4}
