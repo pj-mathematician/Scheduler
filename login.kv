@@ -1,114 +1,113 @@
 
-
 <loginwindow>:
-    name: 'login'
-  
-    FloatLayout:
-        DefaultInput:
-            id: username
-            hint_text: "Enter Email"
-            pos_hint: {'center_x': 0.5, 'center_y': 0.6}
-            color_mode: 'primary'
+	name: 'login'
+	
+	FloatLayout:
+  	  MDTextField:
+      	  id: username
+      	  hint_text: "Enter Username"
+     	   pos_hint: {'center_x': 0.5, 'center_y': 0.6}
+  	      size_hint:(0.50, 0.07)
+ 	       color_mode: 'primary'
         
 
-        DefaultInput:
-            id: password
-            hint_text: "Enter Password"
-            password:True
-            pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+   	 MDTextField:
+  	      id: password
+  	      hint_text: "Enter Password"
+  	      password:True
+	        pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+ 	       size_hint:(0.50, 0.07)
          
 
-        DefaultLabel:
-            text: 'Scheduler'
-            font_size: '50sp'
-            pos_hint: {'center_y': 0.8}
-            font_name: 'Product Sans Bold.ttf'
+  	  DefaultLabel:
+  	      text: 'Scheduler'
+  	      font_size: '50sp'
+    	    pos_hint: {'center_y': 0.8}
+   	     font_name: 'Product Sans Bold.ttf'
 
 
-        MDRoundFlatButton:
-            size_hint: (0.2,0.0675)
-            font_size: '20sp'
-            text: "Login"
-            pos_hint:{'center_x':0.38,'center_y':0.37}
+	    MDRoundFlatButton:
+ 	       size_hint: (0.2,0.0675)
+ 	       font_size: '20sp'
+	        text: "Login"
+   	     pos_hint:{'center_x':0.38,'center_y':0.37}
 
 
-        MDFillRoundFlatButton:
-            size_hint: (0.2,0.0675)
-            font_size: '20sp'
-            text: "Sign Up"
-            pos_hint:{'center_x':0.62,'center_y':0.37}
-            on_release:
-                root.manager.current = "signup"
-                root.manager.transition.direction = 'left'
+  	  MDFillRoundFlatButton:
+   	     size_hint: (0.2,0.0675)
+      	  font_size: '20sp'
+   	     text: 'Sign Up'
+    	    pos_hint:{'center_x':0.62,'center_y':0.37}
+      	  on_release:
+		        root.manager.current = 'signup'
+				root.manager.transition.direction = 'left'
 
 <signupwindow>:
-    name: 'signup'
+	name: 'signup'
 
-    FloatLayout:
-        DefaultLabel:
-            text: 'Welcome to Scheduler!!'
-            font_size: 60
-            pos_hint: {'center_y': 0.85}
-            font_name: 'Product Sans Bold.ttf'
-
-
-        DefaultLabel:
-            text: 'In order to use our application, please fill the following details:-'
-            font_size: 20
-            pos_hint: {'center_y': 0.75}
+	FloatLayout:
+		DefaultLabel:
+			text: 'Welcome to Scheduler!!'
+			font_size: 60
+			pos_hint: {'center_y': 0.85}
+			font_name: 'Product Sans Bold.ttf'
 
 
-        DefaultInput:
-            id: username
-            hint_text: "Enter Full Name"
-            pos_hint: {'center_x': 0.5, 'center_y': 0.65}
+		DefaultLabel:
+			text: 'In order to use our application, please fill the following details:-'
+			font_size: 20
+			pos_hint: {'center_y': 0.75}
 
 
-        DefaultInput:
-            id: email
-            hint_text: 'Enter Email ID'
-            pos_hint: {'center_x': 0.5, 'center_y': 0.55}
-  
+  	  DefaultInput:
+    	    id: username
+      	  hint_text: "Enter Full Name"
+   	     pos_hint: {'center_x': 0.5, 'center_y': 0.65}
 
-        DefaultInput:
-            id: confirm_email
-            hint_text: 'Confirm Email ID'
-            pos_hint: {'center_x': 0.5, 'center_y': 0.45}
+
+    	DefaultInput:
+    		id: email
+    		hint_text: 'Enter Email ID'
+    		pos_hint: {'center_x': 0.5, 'center_y': 0.55}
+	
+
+   	 DefaultInput:
+    		id: confirm_email
+    		hint_text: 'Confirm Email ID'
+   	 	pos_hint: {'center_x': 0.5, 'center_y': 0.45}
         
 
-        DefaultInput:
-            id: password
-            hint_text: "Enter Password"
-            password:True
-            pos_hint: {'center_x': 0.5, 'center_y': 0.35}
+   	 DefaultInput:
+	        id: password
+   	     hint_text: "Enter Password"
+     	   password:True
+    	    pos_hint: {'center_x': 0.5, 'center_y': 0.35}
 
 
-        DefaultInput:
-            id: confirm_pass
-            hint_text: "Confirm Password"
-            password:True
-            pos_hint: {'center_x': 0.5, 'center_y': 0.25}
+   	 DefaultInput:
+     	   id: confirm_pass
+    	    hint_text: "Confirm Password"
+     	   password:True
+  	      pos_hint: {'center_x': 0.5, 'center_y': 0.25}
 
 
-        MDRoundFlatButton:
-            size_hint: (0.2,0.0675)
-            font_size: '20sp'
-            text: "Go Back"
-            pos_hint:{'center_x':0.38,'center_y':0.15}
-            on_release:
-                root.manager.current = "login"
-                root.manager.transition.direction = 'right'
+	    MDRoundFlatButton:
+      	  size_hint: (0.2,0.0675)
+       	 font_size: '20sp'
+  	      text: "Go Back"
+     	   pos_hint:{'center_x':0.38,'center_y':0.15}
+      	  on_release:
+		        root.manager.current = 'login'
+				root.manager.transition.direction = 'right'
 
 
-        MDFillRoundFlatButton:
-            size_hint: (0.2,0.0675)
-            font_size: '20sp'
-            text: "Confirm"
-            pos_hint:{'center_x':0.62,'center_y':0.15}
-            on_release:
-                root.manager.current = 'ninput'
-                root.manager.transition.direction: 'right' 
-
+   	 MDFillRoundFlatButton:
+    	    size_hint: (0.2,0.0675)
+     	   font_size: '20sp'
+    	    text: "Confirm"
+      	  pos_hint:{'center_x':0.62,'center_y':0.15}
+      	  on_release: app.show_dialog()
+      	  
 <newinput>:
 	name: 'ninput'
 	id:ninput
@@ -123,7 +122,9 @@
 			pos_hint:{'center_x':0.6,'center_y':0.8}
 		ClockButton:
 			pos_hint:{'center_x':0.6,'center_y':0.8}
-			on_release: app.wake_time_picker()
+			on_release: 
+				app.time_picker()
+				app.dynamic_ip='wake'
 		ShowTimeLabel:
 			id: wake
 			pos_hint:{'center_x':0.93,'center_y':0.8}
@@ -132,7 +133,9 @@
 			pos_hint:{'center_x':0.6,'center_y':0.75}
 		ClockButton:
 			pos_hint:{'center_x':0.6,'center_y':0.75}
-			on_release: app.bkf_time_picker()
+			on_release: 
+				app.time_picker()
+				app.dynamic_ip='bkf'
 		ShowTimeLabel:
 			id: bkf
 			pos_hint:{'center_x':0.93,'center_y':0.75}	
@@ -141,7 +144,9 @@
 			pos_hint:{'center_x':0.6,'center_y':0.7}
 		ClockButton:
 			pos_hint:{'center_x':0.6,'center_y':0.7}
-			on_release: app.lch_time_picker()
+			on_release: 
+				app.time_picker()
+				app.dynamic_ip='lch'			
 		ShowTimeLabel:
 			id: lch
 			pos_hint:{'center_x':0.93,'center_y':0.7}
@@ -150,7 +155,9 @@
 			pos_hint:{'center_x':0.6,'center_y':0.65}
 		ClockButton:
 			pos_hint:{'center_x':0.6,'center_y':0.65}
-			on_release: app.din_time_picker()
+			on_release: 
+				app.time_picker()
+				app.dynamic_ip='din'			
 		ShowTimeLabel:
 			id: din
 			pos_hint:{'center_x':0.93,'center_y':0.65}
@@ -159,7 +166,9 @@
 			pos_hint:{'center_x':0.6,'center_y':0.6}
 		ClockButton:
 			pos_hint:{'center_x':0.6,'center_y':0.6}
-			on_release: app.slp_time_picker()
+			on_release: 
+				app.time_picker()
+				app.dynamic_ip='slp'
 		ShowTimeLabel:
 			id: slp
 			pos_hint:{'center_x':0.93,'center_y':0.6}
@@ -175,6 +184,7 @@
 <ShowTimeLabel@MDLabel>:
     theme_text_color: 'Primary'
     font_name: 'Product Sans Regular.ttf'	
+
 <DefaultLabel@MDLabel>:
     theme_text_color: 'Primary'
     halign: 'center'
