@@ -1,2 +1,2 @@
 # Scheduler
-Scheduler made in kivy languge
+Scheduler made in kivy language using kivyMD library
