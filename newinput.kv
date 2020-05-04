@@ -1,4 +1,5 @@
-#: include defaults.kv
+#: include force defaults.kv
+
 <newinput>:
 	name: 'ninput'
 	id:ninput
@@ -82,7 +83,7 @@
 			size_hint: (0.2,0.0675)
 			font_size: '20sp'
 			text: "Lets Get Started!"
-			pos_hint:{'center_x':0.5,'center_y':0.25}
+			pos_hint:{'center_x':0.5,'center_y':0.2}
 			on_release: 
 				app.MainApp()
 				app.stop()

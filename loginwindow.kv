@@ -1,23 +1,22 @@
-#: include defaults.kv
+#: include force defaults.kv
 
 <loginwindow>:
     name: 'login'
   
     FloatLayout:
-        MDTextField:
+        DefaultInput:
             id: username
             hint_text: "Enter Username"
             pos_hint: {'center_x': 0.5, 'center_y': 0.6}
-            size_hint:(0.50, 0.07)
             color_mode: 'primary'
+
         
 
-        MDTextField:
+        DefaultInput:
             id: password
             hint_text: "Enter Password"
             password:True
             pos_hint: {'center_x': 0.5, 'center_y': 0.5}
-            size_hint:(0.50, 0.07)
          
 
         DefaultLabel:

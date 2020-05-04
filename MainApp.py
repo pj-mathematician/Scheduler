@@ -42,7 +42,7 @@ Screen:
             Screen:
                 name: "todo"
                 MDFloatingActionButtonSpeedDial:
-                	data: app.data
+                    data: app.data
                 	rotation_root_button: False
                 MDLabel:
                     text: "MDDataTable"
@@ -73,7 +73,7 @@ class TestNavigationDrawer(MDApp):
     data = {'delete':'Delete','pencil':'Add'}
     
     def build(self):
-        self.theme_cls.theme_style = 'Dark'
+        self.theme_cls.theme_style = 'Light'
         return Builder.load_string(KV)
 
 #TestNavigationDrawer().run()

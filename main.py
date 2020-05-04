@@ -14,6 +14,7 @@ from kivymd.uix.snackbar import Snackbar
 from kivymd.uix.picker import MDTimePicker
 import os
 import MainApp
+
 kv1 = 'loginwindow.kv'
 kv2 = 'newinput.kv'
 kv3 = 'signupwindow.kv'
@@ -32,7 +33,8 @@ class newinput(Screen):
 class Test(MDApp):
 
     def build(self):
-        self.theme_cls.theme_style = 'Dark'
+        self.theme_cls.theme_style = 'Light'
+        self.theme_cls.primary_palette = "Purple"
         Builder.load_file(kv1)
         Builder.load_file(kv2)
         Builder.load_file(kv3)
@@ -67,7 +69,7 @@ class Test(MDApp):
         if not self.dialog:
             self.dialog = MDDialog(title='Confirmation',
                                    text='You have been registered.',
-                                   size_hint=(0.7, 0.3),
+                                   size_hint=(0.4, 0.3),
                                    text_button_ok='OK',
                                    events_callback=self.on_signup)
 
