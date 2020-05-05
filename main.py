@@ -13,7 +13,7 @@ from datetime import date
 from kivy.properties import ObjectProperty
 from kivymd.uix.snackbar import Snackbar
 from kivymd.uix.picker import MDTimePicker
-import os
+from kivy.uix.boxlayout import BoxLayout
 import MainApp
 
 kv1 = 'loginwindow.kv'
@@ -30,7 +30,7 @@ class signupwindow(Screen):
 
 class newinput(Screen):
     pass
-	
+
 class Test(MDApp):
 
     def build(self):
@@ -55,14 +55,13 @@ class Test(MDApp):
         self.time_dialog.bind(time=self.show)
         self.time_dialog.open()
     def show(self,instance,time):
-    	self.sm.get_screen('ninput').ids[self.dynamic_ip].text = str(time)
-    	self.fixedtimedict[self.dynamic_ip]=time
-    
+        self.sm.get_screen('ninput').ids[self.dynamic_ip].text = str(time)
+        self.fixedtimedict[self.dynamic_ip]=time
+
     def MainApp(self):
-    	#os.system('MainApp.py')
-    	self.stop()
-    	MainApp.TestNavigationDrawer().run()
-    
+        self.stop()
+        MainApp.TestNavigationDrawer().run()
+
     def on_signup(self, *args):
         self.dialog.dismiss()
         self.sm.current = 'ninput'
@@ -73,15 +72,16 @@ class Test(MDApp):
                                    text='You have been registered.',
                                    size_hint=(0.4, 0.3),
                                    buttons=[
-                                   MDFlatButton(text='CANCEL',on_release=self.dialog_close),
-                                   MDFlatButton(text="OK!", on_release=self.on_signup)
+                                   MDFlatButton(text='CANCEL',text_color=self.theme_cls.primary_color, on_release=self.dialog_close),
+                                   MDFlatButton(text="OK!",text_color=self.theme_cls.primary_color, on_release=self.on_signup)
                                    ])
-
         self.dialog.open()
-       
+
     def dialog_close(self, *args):
         self.dialog.dismiss()
+
     def on_stop(self):
-    	return True
+        return True
+
 if __name__ == '__main__':
-    Test().run()
+    Test().run() 

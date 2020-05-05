@@ -1,8 +1,10 @@
 from kivy.lang import Builder
 from kivy.uix.boxlayout import BoxLayout
 from kivy.properties import ObjectProperty
-
 from kivymd.app import MDApp
+from kivymd.uix.dialog import MDDialog
+
+kv1 = 'custom.kv'
 
 KV = '''
 <ContentNavigationDrawer>:
@@ -48,6 +50,11 @@ Screen:
                     text: "MDDataTable"
                     halign: "center"
 
+                MDFlatButton:
+                    text: "Text"
+                    on_release:
+                        app.event_handler()
+
             Screen:
                 name: "edit"
 
@@ -63,6 +70,9 @@ Screen:
                 nav_drawer: nav_drawer
 '''
 
+class custom_events(BoxLayout):
+    pass
+
 
 class ContentNavigationDrawer(BoxLayout):
     screen_manager = ObjectProperty()
@@ -74,7 +84,18 @@ class TestNavigationDrawer(MDApp):
     
     def build(self):
         self.theme_cls.theme_style = 'Light'
+        Builder.load_file(kv1)
         return Builder.load_string(KV)
 
+    cstm_evnt = None
+
+    def event_handler(self):
+        if not self.cstm_evnt:
+            self.cstm_evnt = MDDialog(
+                                    title='Custom Event',
+                                    type='custom',
+                                    content_cls=custom_events()
+                                    )
+            self.cstm_evnt.open()
 #TestNavigationDrawer().run()
 	

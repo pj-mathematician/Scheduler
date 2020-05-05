@@ -10,14 +10,13 @@
             pos_hint: {'center_x': 0.5, 'center_y': 0.6}
             color_mode: 'primary'
 
-        
 
         DefaultInput:
             id: password
             hint_text: "Enter Password"
             password:True
             pos_hint: {'center_x': 0.5, 'center_y': 0.5}
-         
+        
 
         DefaultLabel:
             text: 'Scheduler'
@@ -31,7 +30,8 @@
             font_size: '20sp'
             text: "Login"
             pos_hint:{'center_x':0.38,'center_y':0.37}
-
+            on_release:
+                app.MainApp()
 
         MDFillRoundFlatButton:
             size_hint: (0.2,0.0675)
