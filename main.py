@@ -5,7 +5,7 @@ from kivy.uix.screenmanager import ScreenManager, Screen
 from kivymd.uix.label import MDLabel
 from kivymd.font_definitions import theme_font_styles
 from kivymd.app import MDApp
-from kivymd.uix.button import MDFlatButton
+from kivymd.uix.button import MDFlatButton, MDRaisedButton
 from kivymd.uix.dialog import MDDialog
 from datetime import datetime
 from datetime import time
@@ -16,6 +16,7 @@ from kivymd.uix.picker import MDTimePicker
 import os
 import MainApp
 import mysqllog
+
 kv1 = 'loginwindow.kv'
 kv2 = 'newinput.kv'
 kv3 = 'signupwindow.kv'
@@ -48,11 +49,11 @@ class Test(MDApp):
     dialog = None
     inpasdialog=None
     inusedialog=None
-    previous_time = ObjectProperty()
     dynamic_ip=None
-    fixedtimedict={}
     val012=None
-    
+    previous_time = ObjectProperty()
+    fixedtimedict={}
+
     def time_picker(self):        
         self.time_dialog=MDTimePicker()
         self.time_dialog.bind(time=self.show)
@@ -76,36 +77,53 @@ class Test(MDApp):
                                    text='You have been registered.',
                                    size_hint=(0.4, 0.3),
                                    buttons=[
-                                   MDFlatButton(text='CANCEL',on_release=self.dialog_close),
-                                   MDFlatButton(text="OK!", on_release=self.on_signup)
+                                   MDFlatButton(text='CANCEL',
+                                                on_release=self.dialog_close,
+                                                text_color=self.theme_cls.primary_color),
+                                   MDRaisedButton(text="OK!", 
+                                                on_release=self.on_signup,
+                                                text_color=self.theme_cls.primary_color)
                                    ])
 
         self.dialog.open()
         
-
-
-
-    
     def checkpass(self, *args):
-        self.inusedialog = MDDialog(title='Username Incorrect',text='Your email is not registered!.',size_hint=(0.4, 0.3),buttons=[MDFlatButton(text='OK',on_release=self.inusedialog_close)])
-        self.inpasdialog = MDDialog(title='Password Incorrect',text='You have entered the incorrect password.',size_hint=(0.4, 0.3),buttons=[MDFlatButton(text='OK',on_release=self.inpasdialog_close)])
+        self.inusedialog = MDDialog(title='Username Incorrect',
+                                    text='Your email is not registered!.',
+                                    size_hint=(0.4, 0.3),
+                                    buttons=[MDRaisedButton(text='OK',
+                                                          on_release=self.inusedialog_close,
+                                                          text_color=self.theme_cls.primary_color)])
+
+        self.inpasdialog = MDDialog(title='Password Incorrect',
+                                    text='You have entered the incorrect password.',
+                                    size_hint=(0.4, 0.3),
+                                    buttons=[MDRaisedButton(text='OK',
+                                                          on_release=self.inpasdialog_close,
+                                                          text_color=self.theme_cls.primary_color)])
         
         self.val012=mysqllog.check(str(self.sm.get_screen('login').ids.username.text),str(self.sm.get_screen('login').ids.password.text))
         if self.val012==1:
             self.stop()
             MainApp.TestNavigationDrawer().run()
+
         elif self.val012==2:
             self.inpasdialog.open()
+
         elif self.val012==0:
             self.inusedialog.open()
         
     def dialog_close(self, *args):
         self.dialog.dismiss()
+
     def inusedialog_close(self, *args):
         self.inusedialog.dismiss()
+
     def inpasdialog_close(self, *args):
         self.inpasdialog.dismiss()
+
     def on_stop(self):
     	return True
+
 if __name__ == '__main__':
     Test().run()

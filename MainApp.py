@@ -4,7 +4,7 @@ from kivy.uix.boxlayout import BoxLayout
 from kivy.properties import ObjectProperty
 
 from kivymd.app import MDApp
-from kivymd.uix.button import MDFlatButton
+from kivymd.uix.button import *
 from kivymd.uix.dialog import MDDialog
 kv1='content.kv'
 KV = '''
@@ -99,8 +99,14 @@ class TestNavigationDrawer(MDApp):
                                     type='custom',
                                     content_cls=custom_events(),
                                     size_hint=(0.4, 0.3),
-                                    buttons=[MDFlatButton(text='OK',on_release=self.cstm_evnt_close)]
-                                    )
+                                    buttons=[MDFlatButton(text='CANCEL',
+                                                          on_release=self.cstm_evnt_close,
+                                                          text_color=self.theme_cls.primary_color),
+
+                                    MDRaisedButton(text='OK',
+                                                           on_release=self.cstm_evnt_close,
+                                                           text_color=self.theme_cls.primary_color,)
+                                                ])
         self.cstm_evnt.open()
     def cstm_evnt_close(self,*args):
         self.cstm_evnt.dismiss()
