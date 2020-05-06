@@ -2,11 +2,12 @@ from kivy.lang import Builder
 from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.boxlayout import BoxLayout
 from kivy.properties import ObjectProperty
-
 from kivymd.app import MDApp
-from kivymd.uix.button import *
+from kivymd.uix.button import MDRaisedButton, MDFlatButton
 from kivymd.uix.dialog import MDDialog
-kv1='content.kv'
+
+kv1='KivyFiles\\content.kv'
+
 KV = '''
 <ContentNavigationDrawer>:
 
@@ -86,7 +87,7 @@ class TestNavigationDrawer(MDApp):
 #        pass
             
     def build(self):
-        self.theme_cls.theme_style = 'Light'
+        self.theme_cls.theme_style = 'Dark'
         Builder.load_file(kv1)
         return Builder.load_string(KV)
 
@@ -95,7 +96,7 @@ class TestNavigationDrawer(MDApp):
     def event_handler(self):
         if not self.cstm_evnt:
             self.cstm_evnt = MDDialog(
-                                    title='Custom Event',
+                                    title='[color=#FFFFFF]Custom Event[/color]',
                                     type='custom',
                                     content_cls=custom_events(),
                                     size_hint=(0.4, 0.3),
@@ -110,6 +111,3 @@ class TestNavigationDrawer(MDApp):
         self.cstm_evnt.open()
     def cstm_evnt_close(self,*args):
         self.cstm_evnt.dismiss()
-
-#TestNavigationDrawer().run()
-	
