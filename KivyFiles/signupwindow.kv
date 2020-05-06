@@ -1,0 +1,74 @@
+#: include KivyFiles\\defaults.kv
+
+<signupwindow>:
+    name: 'signup'
+
+    FloatLayout:
+        DefaultLabel:
+            text: 'Welcome to Scheduler!!'
+            font_size: 60
+            pos_hint: {'center_y': 0.85}
+            font_name: 'Product Sans Bold.ttf'
+
+
+        DefaultLabel:
+            text: 'In order to use our application, please fill the following details:-'
+            font_size: 20
+            pos_hint: {'center_y': 0.75}
+
+
+        DefaultInput:
+            id: name
+            hint_text: "Enter Full Name"
+            pos_hint: {'center_x': 0.5, 'center_y': 0.65}
+            helper_text: "Enter Name"
+            helper_text_mode: "on_focus"
+
+        DefaultInput:
+            id: email
+            hint_text: 'Enter Email ID'
+            pos_hint: {'center_x': 0.5, 'center_y': 0.55}
+            helper_text: "Enter Email"
+            helper_text_mode: "on_focus"    
+
+        DefaultInput:
+            id: confirm_email
+            hint_text: 'Confirm Email ID'
+            pos_hint: {'center_x': 0.5, 'center_y': 0.45}
+            helper_text: "Confirm Email"
+            helper_text_mode: "on_focus"        
+
+        DefaultInput:
+            id: password
+            hint_text: "Enter Password"
+            password:True
+            pos_hint: {'center_x': 0.5, 'center_y': 0.35}
+            helper_text: "Enter Password"
+            helper_text_mode: "on_focus"  
+
+        DefaultInput:
+            id: confirm_pass
+            hint_text: "Confirm Password"
+            password:True
+            pos_hint: {'center_x': 0.5, 'center_y': 0.25}
+            helper_text: "Confirm Password"
+            helper_text_mode: "on_focus" 
+
+        MDRoundFlatButton:
+            size_hint: (0.2,0.0675)
+            font_size: '20sp'
+            text: "Go Back"
+            pos_hint:{'center_x':0.38,'center_y':0.15}
+            on_release:
+                root.manager.current = 'login'
+                root.manager.transition.direction = 'right'
+
+
+        MDFillRoundFlatButton:
+            size_hint: (0.2,0.0675)
+            font_size: '20sp'
+            text: "Confirm"
+            pos_hint:{'center_x':0.62,'center_y':0.15}
+            on_release: 
+                app.show_dialog()
+                app.get_info()
