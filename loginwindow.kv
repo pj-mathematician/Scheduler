@@ -1,0 +1,45 @@
+#: include force defaults.kv
+
+<loginwindow>:
+    name: 'login'
+  
+    FloatLayout:
+        DefaultInput:
+            id: username
+            hint_text: "Enter Username"
+            pos_hint: {'center_x': 0.5, 'center_y': 0.6}
+            color_mode: 'primary'
+
+        
+
+        DefaultInput:
+            id: password
+            hint_text: "Enter Password"
+            password:True
+            pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+         
+
+        DefaultLabel:
+            text: 'Scheduler'
+            font_size: '50sp'
+            pos_hint: {'center_y': 0.8}
+            font_name: 'Product Sans Bold.ttf'
+
+
+        MDRoundFlatButton:
+            size_hint: (0.2,0.0675)
+            font_size: '20sp'
+            text: "Login"
+            pos_hint:{'center_x':0.38,'center_y':0.37}
+            on_release:
+                app.checkpass()
+
+
+        MDFillRoundFlatButton:
+            size_hint: (0.2,0.0675)
+            font_size: '20sp'
+            text: "Sign Up"
+            pos_hint:{'center_x':0.62,'center_y':0.37}
+            on_release:
+                root.manager.current = "signup"
+                root.manager.transition.direction = 'left'
