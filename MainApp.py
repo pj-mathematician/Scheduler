@@ -105,5 +105,5 @@ class TestNavigationDrawer(MDApp):
     def cstm_evnt_close(self,*args):
         self.cstm_evnt.dismiss()
 
-TestNavigationDrawer().run()
+#TestNavigationDrawer().run()
 	
