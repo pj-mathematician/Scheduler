@@ -18,6 +18,7 @@ from kivymd.uix.snackbar import Snackbar
 from kivymd.uix.picker import MDTimePicker
 import MainApp
 import mysqllog
+
 if getattr(sys, "frozen", False):  
     os.environ["Scheduler-master"] = sys._MEIPASS
 else:
@@ -40,9 +41,9 @@ class Test(MDApp):
         self.theme_cls.theme_style = 'Dark'
         self.theme_cls.primary_palette = "Purple" 
 
-        Builder.load_file(f"{os.environ['Scheduler-master']}/KivyFiles/loginwindow.kv")
-        Builder.load_file(f"{os.environ['Scheduler-master']}/KivyFiles/newinput.kv")
-        Builder.load_file(f"{os.environ['Scheduler-master']}/KivyFiles/signupwindow.kv")
+        Builder.load_file(f"{os.environ['Scheduler-master']}/KivyFiles/Login_Signup/loginwindow.kv")
+        Builder.load_file(f"{os.environ['Scheduler-master']}/KivyFiles/Login_Signup/newinput.kv")
+        Builder.load_file(f"{os.environ['Scheduler-master']}/KivyFiles/Login_Signup/signupwindow.kv")
 
         self.sm = ScreenManager()
         self.sm.add_widget(loginwindow())
@@ -87,40 +88,44 @@ class Test(MDApp):
                                     size_hint=(0.4, 0.3),
                                     buttons=[MDRaisedButton(text='OK',
                                                             on_release=self.samepass_close,
-                                                            text_color=self.theme_cls.primary_color)])                                                                   
+                                                            text_color=self.theme_cls.primary_color)]) 
+
         name = str(self.sm.get_screen('signup').ids.name.text)
         email = str(self.sm.get_screen('signup').ids.email.text)
         confirm_email = str(self.sm.get_screen('signup').ids.confirm_email.text)
         password = str(self.sm.get_screen('signup').ids.password.text)
         confirm_pass = str(self.sm.get_screen('signup').ids.confirm_password.text)
+
         if name=='' or email=='' or confirm_email=='' or password=='' or confirm_pass=='':
             self.emptydialog.open()
+
         elif email!=confirm_email:
             self.sameemaildialog.open()
+
         elif password!=confirm_pass:
             self.samepassdialog.open()
+
         elif mysqllog.check(email,password)==1 or mysqllog.check(email,password)==2:
+
             self.alreadydialog.open()
         else:
-            mysqllog.add_new_user([email,password])
+            mysqllog.add_new_user([name, email, password])
             self.show_dialog()
-        
-
-        #print(name, email, confirm_email, password, confirm_pass)
-
 
 
     def time_picker(self):        
         self.time_dialog=MDTimePicker()
         self.time_dialog.bind(time=self.show)
         self.time_dialog.open()
+
     def show(self,instance,time):
-    	self.sm.get_screen('ninput').ids[self.dynamic_ip].text = str(time)
-    	self.fixedtimedict[self.dynamic_ip]=time
+    	self.sm.get_screen('ninput').ids[self.dynamic_ip1].text = str(time)
+    	self.fixedtimedict[self.dynamic_ip1]=time
     
     def MainApp(self, *args):
     	self.stop()
     	MainApp.TestNavigationDrawer().run()
+
     def show_dialog(self, *args):
         if not self.dialog:
             self.dialog = MDDialog(title='[color=#FFFFFF]Confirmation[/color]',
@@ -218,12 +223,12 @@ class Test(MDApp):
         elif self.val012==0:
             self.inusedialog.open()
             
-    def check_focus_email(self, instance, text):
+    def check_focus(self, instance, text):
         if not text:
-            self.sm.get_screen('signup').ids.confirm_email.helper_text='Re-Enter your email!'
+            self.sm.get_screen('signup').ids[self.ip2].helper_text= 'Re-Enter your {}!'.format(self.ip1)
             return
-        if text != self.sm.get_screen('signup').ids.email.text:
-            self.sm.get_screen('signup').ids.confirm_email.helper_text='Email does not match!'
+        if text != self.sm.get_screen('signup').ids[self.ip1].text:
+            self.sm.get_screen('signup').ids[self.ip2].helper_text='{} does not match!'.format(self.ip1)
             instance.error = True
             Animation(
                 duration=0.2, _current_error_color=instance.error_color
@@ -235,7 +240,7 @@ class Test(MDApp):
                 _current_right_lbl_color=instance.error_color,
             ).start(instance)
         else:
-            self.sm.get_screen('signup').ids.confirm_email.helper_text='Re-Enter your email!'
+            self.sm.get_screen('signup').ids[self.ip2].helper_text='Re-Enter your {}!'.format(self.ip1)
             Animation(
                 duration=0.2, _current_error_color=(0, 0, 0, 0)
             ).start(instance)
@@ -246,37 +251,6 @@ class Test(MDApp):
                 _current_right_lbl_color=instance.line_color_focus,
             ).start(instance)
             instance.error = False
-
-    def check_focus_pass(self, instance, text):
-        if not text:
-            self.sm.get_screen('signup').ids.confirm_password.helper_text='Re-Enter your password!'
-            return
-        if text != self.sm.get_screen('signup').ids.password.text:
-            self.sm.get_screen('signup').ids.confirm_password.helper_text='Password does not match!'
-            instance.error = True
-            Animation(
-                duration=0.2, _current_error_color=instance.error_color
-            ).start(instance)
-            Animation(
-                duration=0.2,
-                _current_line_color=instance.error_color,
-                _current_hint_text_color=instance.error_color,
-                _current_right_lbl_color=instance.error_color,
-            ).start(instance)
-        else:
-            self.sm.get_screen('signup').ids.confirm_password.helper_text='Re-Enter your password!'
-            Animation(
-                duration=0.2, _current_error_color=(0, 0, 0, 0)
-            ).start(instance)
-            Animation(
-                duration=0.2,
-                _current_line_color=instance.line_color_focus,
-                _current_hint_text_color=instance.line_color_focus,
-                _current_right_lbl_color=instance.line_color_focus,
-            ).start(instance)
-            instance.error = False
-
-
 
         
     def dialog_close(self, *args):

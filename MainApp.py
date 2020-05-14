@@ -95,7 +95,7 @@ class TestNavigationDrawer(MDApp):
             
     def build(self):
         self.theme_cls.theme_style = 'Dark'
-        Builder.load_file(f"{os.environ['Scheduler-master']}/KivyFiles/content.kv")
+        Builder.load_file(f"{os.environ['Scheduler-master']}/KivyFiles/Main App/content.kv")
         return Builder.load_string(KV)
 
     cstm_evnt = None
