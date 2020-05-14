@@ -6,4 +6,4 @@ Note:-
 
 1) make a localsql.py file including the connection object as mycon
 
-2) The user at the time has to make a new line for adding details of the user to his local server as we haven't followed the same order of attributes in the table.
+2) Made the signup page functional. you should have only two attributes in the usepass table i.e.email and pass 
