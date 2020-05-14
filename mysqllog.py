@@ -34,7 +34,7 @@ def add_new_user(items):
             2) At the current time, this function is NOT IN USE.
     """
 
-    query = "INSERT INTO usepass VALUES({}, {}, {})".format(items[0], items[]1, items[3])
+    query = "INSERT INTO usepass VALUES({}, {}, {})".format(items[0], items[1], items[2])
 
     cur.execute(query)
     localsql.mycon.commit()
