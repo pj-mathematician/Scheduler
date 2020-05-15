@@ -195,33 +195,6 @@ class Test(MDApp):
                                    ])
 
         self.dialog.open()
-        
-    def checkpass(self, *args):
-        self.inusedialog = MDDialog(title='[color=#FFFFFF]Username Incorrect[/color]',
-                                    text='Your email is not registered!.',
-                                    size_hint=(0.4, 0.3),
-                                    buttons=[MDRaisedButton(text='OK',
-                                                            on_release=self.inusedialog_close,
-                                                            text_color=self.theme_cls.primary_color)])
-
-        self.inpasdialog = MDDialog(title='[color=#FFFFFF]Password Incorrect[/color]',
-                                    text='You have entered the incorrect password.',
-                                    size_hint=(0.4, 0.3),
-                                    buttons=[MDRaisedButton(text='OK',
-                                                            on_release=self.inpasdialog_close,
-                                                            text_color=self.theme_cls.primary_color)])
-        
-        self.val012=mysqllog.check(str(self.sm.get_screen('login').ids.username.text),str(self.sm.get_screen('login').ids.password.text))
-
-        if self.val012==1:
-            self.stop()
-            MainApp.TestNavigationDrawer().run()
-
-        elif self.val012==2:
-            self.inpasdialog.open()
-
-        elif self.val012==0:
-            self.inusedialog.open()
             
     def check_focus(self, instance, text):
         if not text:
