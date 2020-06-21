@@ -66,25 +66,25 @@ class Test(MDApp):
 
     def get_info(self):
         self.emptydialog = MDDialog(title='[color=#FFFFFF]Empty details[/color]',
-                                    text='Please fill all the required details!.',
+                                    text='Please fill all the required details!',
                                     size_hint=(0.4, 0.3),
                                     buttons=[MDRaisedButton(text='OK',
                                                             on_release=self.empty_close,
                                                             text_color=self.theme_cls.primary_color)])        
         self.alreadydialog = MDDialog(title='[color=#FFFFFF]Can not register![/color]',
-                                    text='Email already exists!.',
+                                    text='Email already exists!',
                                     size_hint=(0.4, 0.3),
                                     buttons=[MDRaisedButton(text='OK',
                                                             on_release=self.already_close,
                                                             text_color=self.theme_cls.primary_color)])                                                    
         self.sameemaildialog = MDDialog(title='[color=#FFFFFF]Can not register![/color]',
-                                    text='Email and Confirm email do not match!.',
+                                    text='Email and Confirm email do not match!',
                                     size_hint=(0.4, 0.3),
                                     buttons=[MDRaisedButton(text='OK',
                                                             on_release=self.sameemail_close,
                                                             text_color=self.theme_cls.primary_color)])        
         self.samepassdialog = MDDialog(title='[color=#FFFFFF]Can not register![/color]',
-                                    text='Password and Confirm password do not match!.',
+                                    text='Password and Confirm password do not match!',
                                     size_hint=(0.4, 0.3),
                                     buttons=[MDRaisedButton(text='OK',
                                                             on_release=self.samepass_close,
@@ -109,7 +109,7 @@ class Test(MDApp):
 
             self.alreadydialog.open()
         else:
-            mysqllog.add_new_user([email, password])
+            # mysqllog.add_new_user([email, password])
             self.show_dialog()
 
 
@@ -119,8 +119,8 @@ class Test(MDApp):
         self.time_dialog.open()
 
     def show(self,instance,time):
-    	self.sm.get_screen('ninput').ids[self.dynamic_ip1].text = str(time)
-    	self.fixedtimedict[self.dynamic_ip1]=time
+    	self.sm.get_screen('ninput').ids[self.dynamic_ip].text = str(time)
+    	self.fixedtimedict[self.dynamic_ip]=time
     
     def MainApp(self, *args):
     	self.stop()

@@ -139,9 +139,12 @@ class TestNavigationDrawer(MDApp):
         self.cstm_evnt.dismiss()
     def cstm_evnt_append(self, *args):
         cont=custom_events()
-        #my_event=(cont.ids.evnt.text)
-        
+        my_event=(cont.ids.evnt.text)
+        custom_events().ids.evnt.text=None
         self.cstm_evnt.dismiss()
-        self.root.ids.txt.text=self.my_event+str(self.mytime)
+        self.root.ids.txt.text=self.my_event + " " + str(self.mytime)
+        print(self.root.ids.txt.text)
         
-TestNavigationDrawer().run()
+
+if __name__ == "__main__":        
+    TestNavigationDrawer().run()

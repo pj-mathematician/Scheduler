@@ -29,14 +29,16 @@
             hint_text: 'Enter Email ID'
             pos_hint: {'center_x': 0.5, 'center_y': 0.55}
             helper_text: "Enter Email"
-            helper_text_mode: "on_focus"    
+            helper_text_mode: "on_focus"
+            allow_copy: False    
 
         DefaultInput:
             id: confirm_email
             hint_text: 'Confirm Email ID'
             pos_hint: {'center_x': 0.5, 'center_y': 0.45}
             helper_text_mode: "on_error" 
-            
+            allow_copy: False
+
             on_text: 
                 app.ip1 = 'email'
                 app.ip2 = 'confirm_email'
@@ -48,14 +50,16 @@
             password:True
             pos_hint: {'center_x': 0.5, 'center_y': 0.35}
             helper_text: "Enter Password"
-            helper_text_mode: "on_focus"  
+            helper_text_mode: "on_focus"
+            allow_copy: False  
 
         DefaultInput:
             id: confirm_password
             hint_text: "Confirm Password"
             password:True
             pos_hint: {'center_x': 0.5, 'center_y': 0.25}
-            helper_text_mode: "on_error" 
+            helper_text_mode: "on_error"
+            allow_copy: False 
             on_text:
                 app.ip1 = 'password'
                 app.ip2 = 'confirm_password'
