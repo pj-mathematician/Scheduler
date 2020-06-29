@@ -1,6 +1,6 @@
 # Scheduler
-Scheduler made in kivy language using kivyMD library
-To run the program, open main.py and run
+Scheduler made in kivy language using kivyMD library.
+To run the program, open main.py and run.
 
 Note:-
 
