@@ -54,7 +54,6 @@ def add_new_user(items):
     person using at the time has the responsibility of changing it according to their machine
     """
 
-    email = items[0]
     query = "INSERT INTO usepass VALUES('{}', '{}')".format(items[0], items[1])
 
     cur.execute(query)
