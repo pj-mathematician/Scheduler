@@ -8,7 +8,7 @@ def check(email,pwd):
     
     rese=cur.fetchone()    #tuple containing a boolean value.For example--(1,) 
     if rese[0]:    #if 1
-        cur.execute('select pass from usepass where email="%s"'%email)    #get the corresponding true password
+        cur.execute('select password from usepass where email="%s"'%email)    #get the corresponding true password
         resp=cur.fetchone()    #tuple containing password.For example--('pass123',)
 
         if pwd==resp[0]:    # if input password == true password
