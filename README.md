@@ -3,7 +3,7 @@ Scheduler made in kivy language using kivyMD library.
 
 Note:-
 
-1) We have switched over to an online MySQL database. Therefore, this means the user only has to have an internet connection to run the program only. 
+1) We have switched over to an online MySQL database. Therefore, this means the user only has to have an internet connection to run the program. 
 
 2) Made the signup page functional. 
 
