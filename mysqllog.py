@@ -108,14 +108,23 @@ def return_schedule(email):
         time = 60 * int(temp[:2:]) + int(temp[3:5:]) # Converting time to minutes
         things_td[i[0]] = time
 
-    query = f"SELECT TASK, TIME FROM routine WHERE EMAIL = {email}"
+    query = f"SELECT TASK, START_TIME, END FROM routine WHERE EMAIL = {email}"
     cur.execute(query)
     val = cur.fetchall()
 
     info = {}
     for i in val:
-        temp = int(i[1])
-        time = 60 * int(temp[:2:]) + int(temp[3:5:]) # Converting time to minutes
-        info[i[0]] = time
+        if not i[2]:
+
+            temp = int(i[1])
+            time = 60 * int(temp[:2:]) + int(temp[3:5:]) # Converting time to minutes
+            info[i[0]] = time
+
+        else:
+            temp_1 = int(i[1])
+            temp_2 = int(i[2])
+            start_time = 60 * int(temp_1[:2:]) + int(temp_1[3:5:])
+            end_time = 60 * int(temp_2[:2:]) + int(temp_2[3:5:])
+            info[i[0]] = (start_time, end_time)
 
     return return_sched(things_td, info)
