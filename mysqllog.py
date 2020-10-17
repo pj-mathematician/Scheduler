@@ -20,12 +20,12 @@ def check_db():
         localsql.mycon.commit()
 
     if ("things_td",) not in table_list:
-        query = "CREATE TABLE user_data(EMAIL VARCHAR(254) NOT NULL , SUBJECT VARCHAR(40) NOT NULL, TIME INT NOT NULL)"
+        query = "CREATE TABLE things_td(EMAIL VARCHAR(254) NOT NULL , SUBJECT VARCHAR(40) NOT NULL, S_TIME TIME NOT NULL)"
         cur.execute(query)
         localsql.mycon.commit()
 
     if ("routine",) not in table_list:
-        query = "CREATE TABLE routine(EMAIL VARCHAR(254) NOT NULL , TASK VARCHAR(40) NOT NULL, START_TIME INT NOT NULL, END_TIME INT NOT NULL)"
+        query = "CREATE TABLE routine(EMAIL VARCHAR(254) NOT NULL , TASK VARCHAR(40) NOT NULL, START_TIME TIME NOT NULL, END_TIME TIME)"
         cur.execute(query)
         localsql.mycon.commit()
 
@@ -76,7 +76,7 @@ def add_user_data(email, items):
     NOTE : items is a list of tuples containing records in the format => (<subject>, <time>)
            Time should be in the standard HH:MM:SS format
     """
-    query = "INSERT INTO user_data VALUES('{}', %s, %s)".format(email)
+    query = "INSERT INTO things_td VALUES('{}', %s, %s)".format(email)
     cur.executemany(query, items)
     localsql.mycon.commit()
 
@@ -87,9 +87,15 @@ def add_routine(email, tasks):
     NOTE : tasks is a list of tuples containing records in the format => (<event>, <time>)
            Time should be in the standard HH:MM:SS format
     """
-    query = "INSERT INTO routine VALUES('{}', %s, %s)".format(email)
-    cur.executemany(query, items)
-    localsql.mycon.commit()
+    for i in tasks:
+        if len(i) == 2:
+            query = "INSERT INTO routine(EMAIL, TASK, START_TIME) VALUES('{}', %s, %s)".format(email)
+            cur.execute(query, list(i))
+        else:
+            query = "INSERT INTO routine VALUES('{}', %s, %s, %s)".format(email)
+            cur.execute(query, list(i))
+
+        localsql.mycon.commit()
 
 
 def return_schedule(email):
@@ -98,33 +104,37 @@ def return_schedule(email):
     Based on the assumption that the email exists in the database
     """
 
-    query = f"SELECT SUBJECT, TIME FROM user_data WHERE EMAIL = {email}"
+    query = f"SELECT SUBJECT, S_TIME FROM things_td WHERE EMAIL = '{email}'"
     cur.execute(query)
     val = cur.fetchall()
 
     things_td = {}
     for i in val:
-        temp = int(i[1])
-        time = 60 * int(temp[:2:]) + int(temp[3:5:]) # Converting time to minutes
+        temp = str(i[1]).split(':')
+        time = 60 * int(temp[0]) + int(temp[1]) # Converting time to minutes
         things_td[i[0]] = time
 
-    query = f"SELECT TASK, START_TIME, END FROM routine WHERE EMAIL = {email}"
+    query = f"SELECT TASK, START_TIME, END_TIME FROM routine WHERE EMAIL = '{email}'"
     cur.execute(query)
     val = cur.fetchall()
 
     info = {}
     for i in val:
         if not i[2]:
+            temp = str(i[1]).split(':')
 
-            temp = int(i[1])
-            time = 60 * int(temp[:2:]) + int(temp[3:5:]) # Converting time to minutes
+            if len(temp[0]) <= 2: 
+                time = 60 * int(temp[0]) + int(temp[1]) # Converting time to minutes
+                
+            else:
+                time = 1440 * int(temp[0][0]) + 60 * int(temp[1]) + int(temp[2])
+
             info[i[0]] = time
-
         else:
-            temp_1 = int(i[1])
-            temp_2 = int(i[2])
-            start_time = 60 * int(temp_1[:2:]) + int(temp_1[3:5:])
-            end_time = 60 * int(temp_2[:2:]) + int(temp_2[3:5:])
+            temp_1 = str(i[1]).split(':')
+            temp_2 = str(i[2]).split(':')
+            start_time = 60 * int(temp_1[0]) + int(temp_1[1])
+            end_time = 60 * int(temp_2[0]) + int(temp_2[1])
             info[i[0]] = (start_time, end_time)
 
-    return return_sched(things_td, info)
+    return return_sched(info, things_td)

@@ -1,20 +1,20 @@
 #i/p
 from math import floor, ceil
 
-info = {
-    'wakeup': 480,
-    'breakfast': 540,
-    'lunch': 840,
-    'meeting': (900, 1020),
-    'dinner': 1200,
-    'sleep': 1440
-}
+# info = {
+#     'wakeup': 480,
+#     'breakfast': 540,
+#     'lunch': 840,
+#     'meeting': (900, 1020),
+#     'dinner': 1200,
+#     'sleep': 1440
+# }
 
-things_td = {'maths': 240, 'physics': 180, 'chem': 180}
+# things_td = {'maths': 240, 'physics': 180, 'chem': 180}
 
-prod_time = 0
-for i in list(things_td.values()):
-    prod_time+=i
+# prod_time = 0
+# for i in list(things_td.values()):
+#     prod_time+=i
 
 # Needs to be calculated from info
 """
@@ -202,4 +202,3 @@ def return_sched(info, things_td):
             del sched[-2:-4:-1]
 
     return (assign(things_td, sched))
-
