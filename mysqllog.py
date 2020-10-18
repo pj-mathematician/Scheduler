@@ -11,7 +11,7 @@ def check_db():
     EDIT : We switched to an online MySQL server, so this is redundant at this point, but it will stay here anyway
     EDIT #2 : Due to some complications, we have switched back to the offline database(OOF)
     """
-    cur.excecute("SHOW TABLES")
+    cur.execute("SHOW TABLES")
     table_list = cur.fetchall()
 
     if ("usepass",) not in table_list:
