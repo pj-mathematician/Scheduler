@@ -1,5 +1,6 @@
 # Scheduler
-Scheduler made in kivy language using kivyMD library.
+Scheduler made in Kivy language using kivyMD library.
+KivyMD - https://github.com/kivymd/KivyMD
 
 Note:-
 
