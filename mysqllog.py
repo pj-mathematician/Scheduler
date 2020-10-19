@@ -36,11 +36,11 @@ def check(email,pwd):
     1 if everything is correct :-D
     2 if password is incorrect :-O """
     
-    cur.execute('select exists(select * from usepass where email="%s")'%email)    #check for existance of a username
+    cur.execute('SELECT exists(SELECT * FROM usepass WHERE email="%s")'%email)    #check for existance of a username
     
     rese = cur.fetchone()    #tuple containing a boolean value.For example--(1,) 
     if rese[0]:    #if 1
-        cur.execute('select pass from usepass where email="%s"'%email)    #get the corresponding true password
+        cur.execute('SELECT pass FROM usepass WHERE email="%s"'%email)    #get the corresponding true password
         resp = cur.fetchone()    #tuple containing password.For example--('pass123',)
 
         if pwd==resp[0]:    # if input password == true password
@@ -55,17 +55,14 @@ def check(email,pwd):
 
 def add_new_user(items):
     """
-    Currently adding the name, email and passwd without verifying if they match with the 
-    confirmed email id and passwd or not. It will be implemented only after the creation
-    of the respective dialog boxes for such kind of mistakes.
+    Function to add a new user to the database
 
-    NOTE => 1) The order of the values may be different on your table. In that case create 
-    an alternate line to execute the same code on your machine and comment it out. The 
-    person using at the time has the responsibility of changing it according to their machine
+    Currently adding the name, email and password without verifying if they match with the 
+    confirmed email id and password or not. Appropriate measures have been taken to ensure this
+    doesn't happen
     """
 
     query = "INSERT INTO usepass VALUES('{}', '{}')".format(items[0], items[1])
-
     cur.execute(query)
     localsql.mycon.commit()
 
@@ -96,6 +93,23 @@ def add_routine(email, tasks):
             cur.execute(query, list(i))
 
         localsql.mycon.commit()
+
+def remove_routine(email, t_name):
+    """
+    Function to remove sujects from the list of routines
+    """
+    query = f"DELETE FROM routine WHERE TASK = '{t_name}' AND EMAIL = '{email}'"
+    cur.execute(query)
+    localsql.mycon.commit()
+
+
+def remove_user_data(email, s_name):
+    """
+    Function to remove sujects from the list of things to do
+    """
+    query = f"DELETE FROM things_td WHERE SUBJECT = '{s_name}' AND EMAIL = '{email}'"
+    cur.execute(query)
+    localsql.mycon.commit()
 
 
 def return_schedule(email):
@@ -138,3 +152,5 @@ def return_schedule(email):
             info[i[0]] = (start_time, end_time)
 
     return return_sched(info, things_td)
+
+check_db()
