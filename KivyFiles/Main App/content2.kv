@@ -1,0 +1,17 @@
+#: include KivyFiles/defaults.kv
+
+<custom_events2>:
+	orientation: 'vertical'
+	spacing: "15dp"
+	size_hint_y: None
+	height: "100dp"
+	BoxLayout:
+	    orientation: 'vertical'
+
+	    DefaultInput:
+	        id:evnt
+	        hint_text: 'Meeting name'
+	        on_text:
+	            app.my_event=root.ids.evnt.text
+	        	
+		    
