@@ -18,7 +18,7 @@ from kivymd.uix.snackbar import Snackbar
 from kivymd.uix.picker import MDTimePicker
 import MainApp
 import mysqllog
-
+email=''
 if getattr(sys, "frozen", False):  
     os.environ["Scheduler-master"] = sys._MEIPASS
 else:
@@ -92,6 +92,7 @@ class Test(MDApp):
 
         name = str(self.sm.get_screen('signup').ids.name.text)
         email = str(self.sm.get_screen('signup').ids.email.text)
+        self.mainemail=email
         confirm_email = str(self.sm.get_screen('signup').ids.confirm_email.text)
         password = str(self.sm.get_screen('signup').ids.password.text)
         confirm_pass = str(self.sm.get_screen('signup').ids.confirm_password.text)
@@ -109,7 +110,7 @@ class Test(MDApp):
 
             self.alreadydialog.open()
         else:
-            # mysqllog.add_new_user([email, password])
+            mysqllog.add_new_user([email, password])
             self.show_dialog()
 
 
@@ -120,6 +121,7 @@ class Test(MDApp):
 
     def show(self,instance,time):
     	self.sm.get_screen('ninput').ids[self.dynamic_ip].text = str(time)
+    	mysqllog.add_user_data(self.mainemail,[(str(self.dynamic_ip),str(time))])
     	self.fixedtimedict[self.dynamic_ip]=time
     
     def MainApp(self, *args):
@@ -180,7 +182,10 @@ class Test(MDApp):
         self.val012=mysqllog.check(str(self.sm.get_screen('login').ids.username.text),str(self.sm.get_screen('login').ids.password.text))
 
         if self.val012==1:
+            
             self.stop()
+            self.mainemail=str(self.sm.get_screen('login').ids.username.text
+            MainApp.email=str(self.sm.get_screen('login').ids.username.text
             MainApp.TestNavigationDrawer().run()
 
         elif self.val012==2:
