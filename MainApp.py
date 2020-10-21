@@ -17,6 +17,7 @@ from kivymd.uix.list import IRightBodyTouch
 from kivymd.uix.boxlayout import MDBoxLayout
 from kivymd.uix.card import MDCardSwipe
 import mysqllog
+from Logic import mintohhmmss
 if getattr(sys, "frozen", False):  
     os.environ["Scheduler-master"] = sys._MEIPASS
 else:
@@ -25,6 +26,7 @@ else:
 def i2t(instance):
 	return instance.text2
 
+email='Test@gmail.com'
 KV = '''
 <SwipeToDeleteItem>:
     anchor:'right'
@@ -61,7 +63,7 @@ Screen:
 				        elevation: 10
 				        title: "Scheduler"
 				        left_action_items: []
-				        right_action_items:[["plus", lambda x: app.add()],["briefcase-plus", lambda x: app.addM()],["refresh", lambda x: app.refresh_callback()]]                
+				        right_action_items:[["plus", lambda x: app.add()],["briefcase-plus", lambda x: app.addM()],["refresh", lambda x: app.refresh_callback()],["trash-can", lambda x:app.delete()]]                
 	                ScrollView:
 	          
 	                	MDList:
@@ -86,6 +88,8 @@ class custom_events(BoxLayout):
    pass
 class custom_events2(BoxLayout):
    pass
+class custom_events3(BoxLayout):
+   pass
    
 class Container(IRightBodyTouch, MDBoxLayout):
     adaptive_width = True
@@ -104,6 +108,7 @@ class TestNavigationDrawer(MDApp):
     starttime=None
     endtime=None
     data = {'delete':'Delete','pencil':'Add'}
+    	
 
 #    def callback(self, instance, *args):
 #        self.cstm_evnt = MDDialog(title='Custom Event',type='custom',content_cls=custom_events())
@@ -113,14 +118,27 @@ class TestNavigationDrawer(MDApp):
         self.theme_cls.theme_style = 'Dark'
         Builder.load_file(f"{os.environ['Scheduler-master']}/KivyFiles/Main App/content.kv")
         Builder.load_file(f"{os.environ['Scheduler-master']}/KivyFiles/Main App/content2.kv")
+        #Builder.load_file(f"{os.environ['Scheduler-master']}/KivyFiles/Main App/content3.kv")
         return Builder.load_string(KV)
-        self.refresh_callback()
+        #self.refresh_callback()
+    def on_start(self):
+        self.load_schedule()
+    
         
-
+    def load_schedule(self):
+    	for i in mysqllog.return_schedule(email):
+    		starttime=mintohhmmss(i[0])
+    		endtime=mintohhmmss(i[1])
+    		evnt=i[2]
+    		self.main.append((evnt,starttime,endtime))
+    		instance=SwipeToDeleteItem(text=evnt,text2=starttime+' - '+endtime)
+    		self.root.ids.md_list.add_widget(instance)
+    	
     cstm_evnt = None
     cstm_evnt2=None
     confirmd2=None
     confirmdf=None
+    deleteb=None
     dlt_event= None
 
 
@@ -162,7 +180,32 @@ class TestNavigationDrawer(MDApp):
                                                 ])
                                                 
         self.cstm_evnt2.open()
-
+    def delete(self):
+        #self.time_dialog=MDTimePicker()
+        if not self.cstm_evnt2:
+            self.cstm_evnt2 = MDDialog(
+                                    
+                                    title='[color=#FFFFFF]Delete[/color]',
+                                    type='custom',
+                                    content_cls=custom_events2(),
+                                    size_hint=(0.4, 0.3),
+                                    buttons=[MDFlatButton(text='CANCEL',
+                                                          on_release=self.cstm_evnt_close2,
+                                                          text_color=self.theme_cls.primary_color),
+                                    MDRaisedButton(text='Delete',
+                                                           on_release=self.deleteevent
+                                                           )  
+                                                ])
+                                                
+        self.cstm_evnt2.open()
+    def deleteevent(self):
+    	for i in self.ids.md_list:
+    		if str(i.text)==self.my_event:
+    			self.ids.md_list.remove_widget(i)
+    	try:
+    	   mysqllog.remove_routine(email,self.my_event)
+    	except:
+    		mysqllog.remove_user_data(email,self.my_event)    				
     def time_picker(self, *args):        
         self.time_dialog=MDTimePicker()
         #self.time_dialog.title=self.my_event
@@ -194,6 +237,8 @@ class TestNavigationDrawer(MDApp):
         print(self.endtime)
         self.confirmdf=None
         self.confirmfinal()
+    def delete_callback(self):
+        pass
         
     def confirm2(self):
     	if not self.confirmd2:
@@ -227,6 +272,8 @@ class TestNavigationDrawer(MDApp):
                                                            )
                                                 ])
     		self.confirmd.open()
+    def deletecl(self,*args):
+    	self.deleteb.dismiss()
     def clconfirmd(self,*args):
     	self.confirmd.dismiss()
     def clconfirmd2(self,*args):
@@ -283,6 +330,7 @@ class TestNavigationDrawer(MDApp):
     	self.main_event_list.append((instance.text,instance.text2))
     	self.main.append((str(self.my_event),str(self.mytime)))
     	self.root.ids.md_list.add_widget(instance)
+    	mysqllog.add_user_data(email,[(self.my_event,self.mytime)])
     def event_adder2(self,instance):
     	self.confirmdf.dismiss()
     	
@@ -290,6 +338,7 @@ class TestNavigationDrawer(MDApp):
     	self.main_meeting_list.append((str(self.my_event),str(self.starttime),str(self.endtime)))
     	self.main.append((str(self.my_event),str(self.starttime),str(self.endtime)))
     	self.root.ids.md_list.add_widget(instance)
+    	mysqllog.add_routine(email,[(self.my_event,self.starttime,self.endtime)])
 
 if __name__ == "__main__":         
     TestNavigationDrawer().run()
