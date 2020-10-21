@@ -33,7 +33,20 @@ x
     2) If 1) is false, apply scaling
 NOTE : 2hr slot is 1:30 minutes of work and 30 minute leisure
 """
-
+def mintohhmmss(min):
+	h=min//60
+	if h<=9:
+		HH='0'+str(h)
+	elif h==24:
+		HH='00'
+	else:
+		HH=str(h)
+	m=min%60
+	if m<=9:
+		MM='0'+str(m)
+	else:
+		MM=str(m)
+	return HH+':'+MM+':00'
 
 def ft_calc(d):
     var = 0
