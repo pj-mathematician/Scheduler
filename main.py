@@ -184,8 +184,8 @@ class Test(MDApp):
         if self.val012==1:
             
             self.stop()
-            self.mainemail=str(self.sm.get_screen('login').ids.username.text
-            MainApp.email=str(self.sm.get_screen('login').ids.username.text
+            self.mainemail=str(self.sm.get_screen('login').ids.username.text)
+            MainApp.email=str(self.sm.get_screen('login').ids.username.text)
             MainApp.TestNavigationDrawer().run()
 
         elif self.val012==2:
