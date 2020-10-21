@@ -181,6 +181,7 @@ class TestNavigationDrawer(MDApp):
                                                 
         self.cstm_evnt2.open()
     def delete(self):
+        self.cstm_evnt2=None
         #self.time_dialog=MDTimePicker()
         if not self.cstm_evnt2:
             self.cstm_evnt2 = MDDialog(
@@ -198,10 +199,10 @@ class TestNavigationDrawer(MDApp):
                                                 ])
                                                 
         self.cstm_evnt2.open()
-    def deleteevent(self):
+    def deleteevent(self,*args):
     	for i in self.ids.md_list:
     		if str(i.text)==self.my_event:
-    			self.ids.md_list.remove_widget(i)
+    			self.root.ids.md_list.remove_widget(i)
     	try:
     	   mysqllog.remove_routine(email,self.my_event)
     	except:
